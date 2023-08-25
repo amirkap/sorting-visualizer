@@ -29,7 +29,7 @@ class DrawInfo:
     SIDE_PAD = 100
     TOP_PAD = 150
     
-    DELAY = 0.03
+    DELAY = 0.02
 
     def __init__(self, width, height, arr):
         self.width = width
@@ -94,7 +94,7 @@ def perform_chosen_algo(chosen_sorting_algo, draw_info, ascending, arr):
     if chosen_sorting_algo is bubbleSort: 
         while(True):
             try:
-                next(bubbleSort(draw_info, ascending, arr, 0, len(arr) - 1))
+                next(chosen_sorting_algo(draw_info, ascending, arr, 0, len(arr) - 1))
             except StopIteration:
                 break
     else: 
@@ -152,7 +152,6 @@ def mergeSort(draw_info, ascending, arr, p, r):
         mergeSort(draw_info, ascending, arr, mid+1, r)
         mergeSort(draw_info, ascending, arr, p, mid)
         merge_generator = merge(draw_info, ascending, arr, p, mid, r)
-        partition_generator = partition(arr, p, r, draw_info, ascending)
         while True:
             try:
                 next(merge_generator) 
@@ -184,6 +183,46 @@ def merge(draw_info, ascending, arr, p, mid, r):
         draw_array(draw_info, {k: draw_info.MAGENTA, idx: draw_info.CYAN}, True)
         time.sleep(draw_info.DELAY)
         yield True    
+       
+def heapify(draw_info, ascending, arr, n, i):
+    if ascending:
+        compare = lambda x, y: x > y
+    else:
+        compare = lambda x, y: x < y    
+        
+    largest = i  # Initialize the largest element as the root
+    left = 2 * i + 1  # Left child index
+    right = 2 * i + 2  # Right child index
+    
+    # Check if left child exists and is larger than the root
+    if left < n and compare(arr[left], arr[largest]):
+        largest = left
+    
+    # Check if right child exists and is larger than the root
+    if right < n and compare(arr[right], arr[largest]):
+        largest = right
+    
+    # If the largest element is not the root, swap them
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]  # Swap
+        draw_array(draw_info, {largest: draw_info.MAGENTA, i: draw_info.CYAN}, True)
+        time.sleep(draw_info.DELAY)
+        heapify(draw_info, ascending, arr, n, largest)  # Recursively heapify the affected sub-tree
+        
+
+def heapSort(draw_info, ascending, arr, p, r):
+    n = len(arr)
+    
+    # Build a max-heap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(draw_info, ascending, arr, n, i)
+    
+    # Extract elements one by one from the heap
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]  # Swap the current root with the last element
+        draw_array(draw_info, {0: draw_info.MAGENTA, i: draw_info.CYAN}, True)
+        time.sleep(draw_info.DELAY)
+        heapify(draw_info, ascending, arr, i, 0)  # Heapify the reduced heap
     
 @dispatch(DrawInfo, bool, list)
 def bubbleSort(draw_info, ascending, arr):
@@ -253,6 +292,9 @@ def main():
             elif event.key == pygame.K_m and not sorting:
                 sorting_algo = mergeSort
                 sorting_algo_name = "MergeSort" 
+            elif event.key == pygame.K_h and not sorting:
+                sorting_algo = heapSort
+                sorting_algo_name = "HeapSort"    
             elif event.key == pygame.K_b and not sorting:
                 sorting_algo = bubbleSort
                 sorting_algo_name = "Bubble Sort"       
