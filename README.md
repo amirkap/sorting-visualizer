@@ -27,7 +27,7 @@ The following sorting algorithms are currently implemented in the program:
    ```bash
    pip install pygame
 
-### Usage
+## Usage
 
 Upon running the program, a graphical window will appear showing an array of elements in random order.
 
