@@ -1,4 +1,4 @@
-# Sorting Algorithm Visualization
+# Sorting Algorithms Visualizer
 
 This program, `sorting.py`, is designed to visualize some of the most well-known sorting algorithms using the `pygame` module. The visualization provides a graphical representation of how each sorting algorithm works, helping users better understand their mechanics.
 
