@@ -33,17 +33,17 @@ Upon running the program, a graphical window will appear showing an array of ele
 
 Press the following keys to configure the sorting:
 
-**'B'**: Bubble Sort visualization.
+**'B'**: Bubble Sort visualization
 
-**'M'**: Merge Sort visualization.
+**'M'**: Merge Sort visualization
 
-**'Q'**: Quick Sort visualization.
+**'Q'**: Quick Sort visualization
 
-**'H'**: Heap Sort visualization.
+**'H'**: Heap Sort visualization
 
-**'A'**: Ascending sort.
+**'A'**: Ascending sort
 
-**'D'**: Descending sort.
+**'D'**: Descending sort
 
 
 
