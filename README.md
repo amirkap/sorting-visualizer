@@ -1,7 +1,5 @@
 # Sorting Algorithm Visualization
 
-![Sorting Algorithm Visualization](sorting_visualization.gif)
-
 This program, `sorting.py`, is designed to visualize some of the most well-known sorting algorithms using the `pygame` module. The visualization provides a graphical representation of how each sorting algorithm works, helping users better understand their mechanics.
 
 ## Supported Sorting Algorithms
@@ -48,9 +46,12 @@ Press the following keys to configure the sorting:
 **'D'**: Descending sort.
 
 
+
 When done, press **'SPACE'** to start the sorting visualization. 
 
 You can reset the array by pressing **'R'** before or after sorting.
+
+
 
 
 Close the visualization window to exit the program.
